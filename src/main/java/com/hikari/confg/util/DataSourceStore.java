@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import javax.sql.DataSource;
 
 public class DataSourceStore {
@@ -30,7 +31,16 @@ public class DataSourceStore {
 	protected Connection getConnection(String key) throws Exception {
 		DataSource ds = getDataSource(key);
 		if(ds != null) {
-			return ds.getConnection();
+			/* try { */
+				return ds.getConnection();
+			/*} catch(SQLException ex) {
+				if(dsMap.containsKey(key)) {
+					dsMap.remove(key);
+				}
+				throw ex;
+			}
+			*/
 		} else throw new Exception("Datasource: " + ds);
 	}
+
 }
